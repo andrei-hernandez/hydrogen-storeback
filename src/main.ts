@@ -1,8 +1,20 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { NestFactory } from "@nestjs/core"
+import { AppModule } from "./app.module"
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger"
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const app = await NestFactory.create(AppModule)
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle("Hydrogen storeback API")
+    .setDescription("Hydrogen storeback API description")
+    .setVersion("0.1")
+    .build()
+
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig)
+  SwaggerModule.setup("api/docs", app, swaggerDocument)
+
+  app.setGlobalPrefix("api")
+
+  await app.listen(4000)
 }
-bootstrap();
+bootstrap().then(() => null)
