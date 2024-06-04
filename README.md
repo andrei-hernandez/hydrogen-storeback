@@ -32,6 +32,31 @@
 $ pnpm install
 ```
 
+**Environment:**
+```dotenv
+# Settings for postgresql container
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+
+# For prisma debug
+DEBUG="prisma*"
+
+# For prisma client
+DATABASE_URL=postgres://{user}:{password}@{hostname}:{port}/{database-name}
+```
+
+**Setting up datababase via docker:**
+```bash
+$ docker compose up -d
+```
+
+**Setting up prisma:**
+```bash
+$ npx prisma db push
+$ npx prisma generate
+```
+
 ## Running the app
 
 ```bash
@@ -43,6 +68,12 @@ $ pnpm run start:dev
 
 # production mode
 $ pnpm run start:prod
+```
+
+## Api docs
+```bash
+# Swagger
+http://localhost:3000/api/docs
 ```
 
 ## Test
